@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap');
+
+// Hiragino Kaku Gothic Pro
+@font-face {
+  font-family: 'Hiragino Kaku Gothic Pro';
+  src: url('./fonts/hiragino-kaku-gothic-pro-w3.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Hiragino Kaku Gothic Pro';
+  src: url('./fonts/hiragino-kaku-gothic-pro-w6.otf') format('opentype');
+}
+
+// SF-Pro
+@font-face {
+  font-family: 'SF Pro';
+  src: url('./fonts/SF-Pro.ttf') format('truetype');
+}
+
+// SF-Pro-text
+@font-face {
+  font-family: 'SF Pro Text';
+  font-weight: 400;
+  src: url('./fonts/SF-Pro-Text-Regular.otf') format('opentype');
+}
+@font-face {
+  font-family: 'SF Pro Text';
+  font-weight: 500;
+  src: url('./fonts/SF-Pro-Text-Medium.otf') format('opentype');
+}
+@font-face {
+  font-family: 'SF Pro Text';
+  font-weight: 700;
+  src: url('./fonts/SF-Pro-Text-Bold.otf') format('opentype');
+}
+@font-face {
+  font-family: 'SF Pro Text';
+  font-weight: 900;
+  src: url('./fonts/SF-Pro-Text-Black.otf') format('opentype');
+}
+
+
+body {
+  margin: 0px;
+}
