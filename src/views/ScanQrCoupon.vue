@@ -55,7 +55,7 @@ watch(
 
             // If you want to prefer front camera
             html5QrCode.start(
-                { facingMode: "user" },
+                { facingMode: "environment" },
                 config,
                 qrCodeSuccessCallback,
                 undefined,
