@@ -37,7 +37,14 @@ const emits = defineEmits<{
     (e: "update:modelValue", v: boolean): void;
 }>();
 const cancelModal = (): any => {
-    html5QrcodeScanner.value.clear();
+    const html5QrCode = new Html5Qrcode("reader");
+    if (html5QrCode.isScanning) {
+        html5QrCode
+            .stop()
+            .then((ignore) => {})
+            .catch((err) => {});
+    }
+
     emits("update:modelValue", false);
 };
 watch(
@@ -48,17 +55,18 @@ watch(
             await nextTick();
             const html5QrCode = new Html5Qrcode("reader");
             const qrCodeSuccessCallback = (message: any) => {
-                /* handle success */
+                alert(message);
+            };
+            const qrCodeErrorCallback = (message: any) => {
                 alert(message);
             };
             const config = { fps: 10, qrbox: 250 };
 
-            // If you want to prefer front camera
             html5QrCode.start(
                 { facingMode: "environment" },
                 config,
                 qrCodeSuccessCallback,
-                undefined,
+                qrCodeErrorCallback,
             );
         }
     },
