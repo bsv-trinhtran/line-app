@@ -57,16 +57,13 @@ watch(
             const qrCodeSuccessCallback = (message: any) => {
                 alert(message);
             };
-            const qrCodeErrorCallback = (message: any) => {
-                alert(message);
-            };
             const config = { fps: 10, qrbox: 250 };
 
             html5QrCode.start(
                 { facingMode: "environment" },
                 config,
                 qrCodeSuccessCallback,
-                qrCodeErrorCallback,
+                undefined,
             );
         }
     },
