@@ -1,0 +1,25 @@
+{
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build"
+    },
+    "devDependencies": {
+        "axios": "^1.1.2",
+        "laravel-vite-plugin": "^0.8.0",
+        "vite": "^4.0.0"
+    },
+    "dependencies": {
+        "@vitejs/plugin-vue": "^4.4.0",
+        "vue": "^3.2.36",
+        "vue-loader": "^17.3.1",
+        "@line/liff": "^2.22.4",
+        "html5-qrcode": "^2.3.8",
+        "pinia": "^2.1.6",
+        "sass": "^1.68.0",
+        "vue-final-modal": "^4.4.5",
+        "vuetify": "^3.3.23",
+        "vue-router": "^4.2.4"
+    }
+}
