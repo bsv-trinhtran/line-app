@@ -46,26 +46,19 @@ watch(
         showModal.value = value;
         if (showModal.value) {
             await nextTick();
-            Html5Qrcode.getCameras()
-                .then((devices) => {
-                    /**
-                     * devices would be an array of objects of type:
-                     * { id: "id", label: "label" }
-                     */
-                    alert(123);
-                    if (devices && devices.length) {
-                        var cameraId = devices[0].id;
-                        // .. use this to start scanning.
-                    }
-                })
-                .catch((err) => {
-                    alert(err);
-                    // handle err
-                });
-            html5QrcodeScanner.value = new Html5QrcodeScanner(
-                "reader",
-                { fps: 10, qrbox: 250 },
-                false,
+            const html5QrCode = new Html5Qrcode("reader");
+            const qrCodeSuccessCallback = (message: any) => {
+                /* handle success */
+                alert(message);
+            };
+            const config = { fps: 10, qrbox: 250 };
+
+            // If you want to prefer front camera
+            html5QrCode.start(
+                { facingMode: "user" },
+                config,
+                qrCodeSuccessCallback,
+                undefined,
             );
         }
     },
