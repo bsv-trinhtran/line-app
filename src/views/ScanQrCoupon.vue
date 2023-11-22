@@ -39,19 +39,13 @@ const emits = defineEmits<{
 }>();
 const cancelModal = (): any => {
     if (html5QrcodeScanner.value.isScanning) {
-        html5QrcodeScanner.value
-            .stop()
-            .then((ignore) => {})
-            .catch((err) => {});
+        html5QrcodeScanner.value.stop();
     }
     emits("update:modelCancel", false);
 };
 const submitModal = (): any => {
     if (html5QrcodeScanner.value.isScanning) {
-        html5QrcodeScanner.value
-            .stop()
-            .then((ignore) => {})
-            .catch((err) => {});
+        html5QrcodeScanner.value.stop();
     }
 
     emits("update:modelValue", true);
