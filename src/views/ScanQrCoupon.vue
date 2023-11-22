@@ -39,13 +39,19 @@ const emits = defineEmits<{
 }>();
 const cancelModal = (): any => {
     if (html5QrcodeScanner.value.isScanning) {
-        html5QrcodeScanner.value.stop();
+        html5QrcodeScanner.value
+            .stop()
+            .then((ignore) => {})
+            .catch((err) => {});
     }
     emits("update:modelCancel", false);
 };
 const submitModal = (): any => {
     if (html5QrcodeScanner.value.isScanning) {
-        html5QrcodeScanner.value.stop();
+        html5QrcodeScanner.value
+            .stop()
+            .then((ignore) => {})
+            .catch((err) => {});
     }
 
     emits("update:modelValue", true);
@@ -63,7 +69,7 @@ watch(
             const config = {
                 fps: 10,
                 qrbox: 250,
-                rememberLastUsedCamera: true,
+                rememberLastUsedCamera: false,
             };
 
             html5QrcodeScanner.value.start(
