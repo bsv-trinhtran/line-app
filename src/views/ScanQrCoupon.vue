@@ -69,7 +69,7 @@ watch(
             const config = {
                 fps: 10,
                 qrbox: 250,
-                rememberLastUsedCamera: false,
+                rememberLastUsedCamera: true,
             };
 
             html5QrcodeScanner.value.start(
