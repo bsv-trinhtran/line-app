@@ -2,7 +2,7 @@
     <div class="main-scan-qr" v-if="showModal">
         <div class="header">
             <span>店舗に置いてあるQRコードを 読み取ってください。</span>
-            <img src="/images/icon-close.svg" alt="" />
+            <img src="/images/icon-close.svg" alt="" @click="cancelModal" />
         </div>
         <div id="reader"></div>
         <div class="footer">
@@ -17,7 +17,7 @@
                     <span>店舗コード</span>
                     <input type="text" />
                 </div>
-                <div class="btn-close" @click="cancelModal">OK</div>
+                <div class="btn-submit" @click="submitModal">OK</div>
             </div>
         </div>
         <!-- <qrcode-scanner v-bind:qrbox="250" v-bind:fps="10" style="width: 500px"  @qrScanned="onQrScanned"> </qrcode-scanner> -->
@@ -26,7 +26,7 @@
 
 <script setup lang="ts">
 import { watch, ref, nextTick } from "vue";
-import { Html5QrcodeScanner, Html5Qrcode } from "html5-qrcode";
+import { Html5Qrcode } from "html5-qrcode";
 
 const html5QrcodeScanner = ref();
 const showModal = ref(false);
@@ -34,18 +34,27 @@ const props = defineProps({
     modelValue: Boolean,
 });
 const emits = defineEmits<{
+    (e: "update:modelCancel", v: boolean): void;
     (e: "update:modelValue", v: boolean): void;
 }>();
 const cancelModal = (): any => {
-    const html5QrCode = new Html5Qrcode("reader");
-    if (html5QrCode.isScanning) {
-        html5QrCode
+    if (html5QrcodeScanner.value.isScanning) {
+        html5QrcodeScanner.value
+            .stop()
+            .then((ignore) => {})
+            .catch((err) => {});
+    }
+    emits("update:modelCancel", false);
+};
+const submitModal = (): any => {
+    if (html5QrcodeScanner.value.isScanning) {
+        html5QrcodeScanner.value
             .stop()
             .then((ignore) => {})
             .catch((err) => {});
     }
 
-    emits("update:modelValue", false);
+    emits("update:modelValue", true);
 };
 watch(
     () => props.modelValue,
@@ -53,13 +62,17 @@ watch(
         showModal.value = value;
         if (showModal.value) {
             await nextTick();
-            const html5QrCode = new Html5Qrcode("reader");
+            html5QrcodeScanner.value = new Html5Qrcode("reader");
             const qrCodeSuccessCallback = (message: any) => {
                 alert(message);
             };
-            const config = { fps: 10, qrbox: 250 };
+            const config = {
+                fps: 10,
+                qrbox: 250,
+                rememberLastUsedCamera: true,
+            };
 
-            html5QrCode.start(
+            html5QrcodeScanner.value.start(
                 { facingMode: "environment" },
                 config,
                 qrCodeSuccessCallback,
@@ -156,8 +169,9 @@ watch(
                     padding: 0px 12px;
                 }
             }
-            .btn-close {
+            .btn-submit {
                 height: 65px;
+                width: 100%;
                 border-radius: 8px;
                 background: #098fac;
                 display: flex;
@@ -167,6 +181,8 @@ watch(
                 font-weight: 600;
                 font-size: 20px;
                 line-height: 20px;
+                opacity: 1;
+                color: #ffffff;
             }
         }
     }
@@ -200,6 +216,7 @@ watch(
             top: 50%;
             left: 50%;
             transform: translate(-50%, -100%);
+            background-size: contain;
         }
         > div {
             display: none !important;
