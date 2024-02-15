@@ -41,8 +41,8 @@ const cancelModal = (): any => {
     if (html5QrcodeScanner.value.isScanning) {
         html5QrcodeScanner.value
             .stop()
-            .then((ignore) => {})
-            .catch((err) => {});
+            .then(() => {})
+            .catch(() => {});
     }
     emits("update:modelCancel", false);
 };
@@ -50,8 +50,8 @@ const submitModal = (): any => {
     if (html5QrcodeScanner.value.isScanning) {
         html5QrcodeScanner.value
             .stop()
-            .then((ignore) => {})
-            .catch((err) => {});
+            .then(() => {})
+            .catch(() => {});
     }
 
     emits("update:modelValue", true);
