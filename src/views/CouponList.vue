@@ -1,7 +1,7 @@
 <template>
     <div class="main-coupon-list">
         <div class="header-coupon-list">
-            <div class="image-header"></div>
+            <!-- <div class="image-header"></div> -->
             <span class="title-header"
                 >おトクにメダルをほしい方はサブスク！！</span
             >
